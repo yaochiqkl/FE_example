@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>111</title>
+	<!--<script type="text/javascript" src="1.js"></script>-->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<style type="text/css">
+	* { margin:0; padding:0; word-break:break-all; }
+	body { background:#FFF; color:#333; font:12px/1.5em Helvetica, Arial, sans-serif; }
+	h1, h2, h3, h4, h5, h6 { font-size:1em; }
+	a { color:#2B93D2; text-decoration:none; }
+	a:hover { color:#E31E1C; text-decoration:underline; }
+	ul, li { list-style:none; }
+	fieldset, img { border:none; }
+
+	img{width: 200px;height: 100px;}
+	.v_show{
+		border: 1px solid black;
+		width: 840px;
+		height: 130px;
+		margin: 200px auto ;
+	}
+	.v_caption{
+		background-color: grey;
+	}
+	h2{
+		display: inline;
+	}
+	.highlight_tip{
+		display: inline;
+	}
+	.change_btn{
+		display: inline;
+	}
+	li{
+		display: inline;
+		margin: 5px;
+	}
+	.v_content{
+		width: 840px;
+		height: 130px;
+		overflow: hidden;
+		position: relative;
+	}
+	.v_content_list{
+		position: absolute;
+		width: 2800px;
+	}
+	li{float: left;}
+	span{cursor: pointer;}
+	</style>
+</head>
+<body>
+	<div class="v_show">
+		<div class="v_caption">
+			<h2 class="cartoon" title="动漫">卡通动漫</h2>
+			<div class="highlight_tip">
+				<span class="current">1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>
+			</div>
+			<div class="change_btn">
+				<span class="prev">上一页</span>
+				<span class="next">下一页</span>
+			</div>
+			<em><a href="">More</a></em>
+		</div>
+		<div class="v_content">
+			<div class="v_content_list">
+				<ul>
+					<li><a href=""></a><img src="1.jpg" alt=""></li>
+					<li><a href=""></a><img src="1.jpg" alt=""></li>
+					<li><a href=""></a><img src="1.jpg" alt=""></li>
+					<li><a href=""></a><img src="1.jpg" alt=""></li>
+					<li><a href=""></a><img src="2.jpg" alt=""></li>
+					<li><a href=""></a><img src="2.jpg" alt=""></li>
+					<li><a href=""></a><img src="2.jpg" alt=""></li>
+					<li><a href=""></a><img src="2.jpg" alt=""></li>
+					<li><a href=""></a><img src="3.jpg" alt=""></li>
+					<li><a href=""></a><img src="3.jpg" alt=""></li>
+					<li><a href=""></a><img src="3.jpg" alt=""></li>
+					<li><a href=""></a><img src="3.jpg" alt=""></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+	var page = 1;
+	var i = 4;  //每版放4张
+	$("span.next").click(function() {
+		var $v_content = $(".v_content");
+		var $v_show = $(".v_content_list");
+		var v_width =  $v_content.width();
+		var len = $v_show.find("li").length;
+		var page_count = Math.ceil(len/i);
+		if(!$v_show.is(":animated")){
+			if(page == page_count){
+				$v_show.animate({left:'0px'},"normal");
+				page = 1;
+			}else{
+				$v_show.animate({left:'-='+v_width},"normal");
+				page++;
+			}	
+		}
+	});
+	$("span.prev").click(function() {
+		var $v_content = $(".v_content");
+		var $v_show = $(".v_content_list");
+		var v_width =  $v_content.width();
+		var len = $v_show.find("li").length;
+		var page_count = Math.ceil(len/i);
+		if(!$v_show.is(":animated")){
+			if(page == 1){
+				$v_show.animate({left:'-='+v_width*(page_count-1)},"normal");
+				page = page_count;
+			}else{
+				$v_show.animate({left:'+='+v_width},"normal");
+				page--;
+			}	
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>111</title>
+	<!--<script type="text/javascript" src="1.js"></script>-->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<style type="text/css">
+	.tip img{
+		width: 200px;
+		height: 100px;
+	}
+	</style>
+</head>
+<body>
+<div class="a">
+	<a href="1.jpg" class="tip" title="Prompt1"><img src="1.jpg"></a>
+	<a href="2.jpg" class="tip" title="Prompt2"><img src="2.jpg"></a>
+	<a href="3.jpg" class="tip" title="Prompt3"><img src="3.jpg"></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	var x = 10;
+	var y = 20;
+	$(".tip").mouseover(function(e){
+		this.myTitle = this.title;
+		this.title = "";
+		var imgTitle = this.myTitle? "<br/>this.myTitle":"";
+		var tip = "<div id='tip'><img src='"+this.href+"' alt='fuckme'>"+imgTitle+"</div>";
+		$("body").append(tip);
+		$("#tip").css({
+				"top":(e.pageY+y)+"px",
+				"left":(e.pageX+x)+"px",
+				"border":"1px solid black",
+				"blackground":"yellow",
+				"position":"absolute"
+			}).show("slow");
+	}).mouseout(function(){
+		this.title = this.myTitle;
+		$("#tip").remove();
+	}).mousemove(function(e){
+		$("#tip").css({
+			"top":(e.pageY+y)+"px",
+			"left":(e.pageX+x)+"px"
+		});
+	});
+});
+</script>
+</body>
+</html>
