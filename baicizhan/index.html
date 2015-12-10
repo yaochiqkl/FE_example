@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	<header></header>
+	<nav></nav>
+	<article class="content">
+		<header class="head">
+			<span class="goback"></span>
+			<span class="submit">交卷</span>
+		</header>
+		<section class="main" id="main">
+			<div class="tip">
+				<span class="book_img"></span>
+				<span class="text_tip">点击空格处，选择最恰当的单词</span>
+			</div>
+		</section>
+		<div id="drag">
+			<span class="dragImg"></span>
+		</div>
+		<section class="foot">
+			<div class="number">
+				<span class="question_number" id="question_num0">1</span>
+				<span class="question_number" id="question_num1">2</span>
+				<span class="question_number" id="question_num2">3</span>
+				<span class="question_number" id="question_num3">4</span>
+				<span class="question_number" id="question_num4">5</span>
+				<span class="question_number" id="question_num5">6</span>
+				<span class="question_number" id="question_num6">7</span>
+				<span class="question_number" id="question_num7">8</span>
+				<span class="question_number" id="question_num8">9</span>
+				<span class="question_number" id="question_num9">10</span><br>
+			</div>
+			<div class="answer">
+				<table>
+					<tr><td></td><td></td><td></td></tr>
+					<tr><td></td><td></td><td></td></tr>
+					<tr><td></td><td></td><td></td></tr>
+					<tr><td></td><td></td><td></td></tr>
+					<tr><td></td><td></td><td></td></tr>
+				</table>
+			</div>
+		</section>
+	</article>
+	<div class="maskLayer"></div>
+	<div class="popUpWin" style="display:none;">
+		<header class="head">
+			<h1>成绩报告</h1>
+		</header>
+		<article class="main">
+			<div class="accuracy">
+				<div class="outcome">30%</div>
+				<div class="text">正确率</div>
+			</div>
+			<table>
+				<tr>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+					<td>10</td>
+				</tr>
+			</table>
+		</article>
+		<footer class="foot">
+			<a href="#" class="inquery">查解析</a>
+			<a href="javascript:void(0);" class="goback">回列表</a>
+		</footer>
+	</div>
+	<footer></footer>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/data.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
