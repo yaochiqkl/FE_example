@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	Open Console to see the output.
+	<script>
+		var tree = [{
+		  name: "a1",
+		  children: [
+		    {
+		      name: "a1-1",
+		      children: [
+		        {
+		          name: "a1-1-1"
+		        },
+		        {
+		          name: "a1-1-2"
+		        }
+		      ]
+		    },{
+		      name: "b1"
+		    },{
+		      name: "c1",
+		      children: [
+		      	{
+		      		name: "c1-1"
+		      	},{
+		      		name: "c1-2",
+		      		children: [
+		      			{
+		      				name:"c1-2-1"
+		      			}
+		      		]
+		      	}
+		      ]
+		    }
+		  ]
+		}];
+		function walk(node, func) {
+		  var i = 0;
+		  func(node);
+		  node = node.children;
+		  if (!node) return;
+		  while (node[i]) {
+		    walk(node[i++], func);
+		  }
+		}
+		function getName(item) {
+		  item && item.name && console.log(item.name);
+		}
+		console.log("origin tree");
+		console.log(tree);
+		console.log("=====");
+		console.log("recursive output");
+		walk(tree[0], getName)
+	</script>
+</body>
+</html>
