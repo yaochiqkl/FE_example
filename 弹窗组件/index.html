@@ -31,56 +31,98 @@
 			cursor: pointer;
 			transform: rotate(45deg);
 		}
+		.modal>.btn-group{
+			position: absolute;
+			bottom: 0;
+			border-top: 1px solid black;
+			width: 100%;
+			text-align: center;
+			padding: 3px;
+		}
 		.maskLayer{
 			width: 100%;
 			height: 100%;
 			top: 0;
 			left: 0;
 			position: fixed;
-			background: rgba(0,0,0,0.2);
+			background: rgba(0,0,0,0.35);
 		}
 	</style>
 </head>
 <body>
-	<!-- <div class="modal"><div class="title">题目<span class="close">+</span></div><div class="content">内容</div></div>
-	<div class="maskLayer"></div> -->
+	<!-- <div class="maskLayer">
+		<div class="modal">
+			<div class="title-area">
+				<span class="title">题目</span>
+				<span class="close">+</span>
+			</div>
+			<div class="content">内容</div>
+			<div class="btn-group">
+				<button class="submit">确认</button>
+				<button class="cancel">取消</button>
+			</div>
+		</div>
+	</div> -->
 	<button onclick="confirm()">确认</button>
 	<script>
+	//构造函数模式
+	//缺点 未用new创建时this将指向windows导致全局变量污染
 	var Modal = function(){
-		var template = '<div class="title-area"><span class="title">题目</span><span class="close">+</span></div><div class="content">内容</div>';
-		var fragment = document.createDocumentFragment();
+		var template = '<div class="maskLayer"><div class="modal"><div class="title-area"><span class="title">题目</span><span class="close">+</span></div><div class="content">内容</div><div class="btn-group"><button class="submit">确认</button><button class="cancel">取消</button></div></div></div>';
 		var container = document.createElement("div");
-		var maskLayer = document.createElement("div");
-		fragment.appendChild(container);
-		fragment.appendChild(maskLayer);
 		container.innerHTML = template;
-		container.classList.add("modal");
+		container.classList.add("maskLayer");
 		container.style.display = "none";
-		maskLayer.classList.add("maskLayer");
-		maskLayer.style.display = "none";
-		document.body.appendChild(fragment);
-		this.init = function(title, content) {
-			var titleContainer = container.querySelector(".title");
-			var contentContainer = container.querySelector(".content");
+		document.body.appendChild(container);
+
+		this.init = function(param) {
+			var titleContainer = container.querySelector(".title"),
+				contentContainer = container.querySelector(".content"),
+				title = param.title || "提示",
+				content = param.content || "你确认进行此操作吗？",
+				submitHandler = param.submitHandler || null,
+				submitBtn = container.querySelector('.submit');
 			titleContainer.innerHTML = title;
 			contentContainer.innerHTML = content;
+			if (submitHandler) {
+				submitBtn.addEventListener("click", submitHandler);
+			}
 			return this;
 		};
 		this.show = function() {
 			container.style.display = "block";
-			maskLayer.style.display = "block";
 			return this;
 		};
+		this.hide = function() {
+			container.style.display = "none";
+		};
+		this.remove = function() {
+			container.remove();
+		};
+
+		//event bind
+		var closeBtn = container.querySelector('.close');
+		var cancelBtn = container.querySelector('.cancel');
+		var submitBtn = container.querySelector('.submit');
+		closeBtn.addEventListener("click", this.remove);
+		cancelBtn.addEventListener("click", this.remove);
+		submitBtn.addEventListener("click", this.remove);
+
 		return this;
 	};
-	Modal.prototype.foo = function(){
-		console.log(this);
-	}
 
 	function confirm(){
 		var m = new Modal();
-		m.init("确认删除用例","您确定要删除该用例吗").show();
-		window.m = m;
+		// m.init("确认删除用例","您确定要删除该用例吗").show();
+		m.init({
+			title: "确认删除用例",
+			content: "您确定要删除该用例吗？",
+			submitHandler: submit
+		}).show();
+	}
+
+	function submit(){
+		console.log("send data success!");
 	}
 	</script>
 </body>
