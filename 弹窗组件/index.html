@@ -68,6 +68,10 @@
 	//构造函数模式
 	//缺点 未用new创建时this将指向windows导致全局变量污染
 	var Modal = function(){
+		if (this == window) {
+			console.log("Please use NEW when creating");
+			return;
+		}
 		var template = '<div class="maskLayer"><div class="modal"><div class="title-area"><span class="title">题目</span><span class="close">+</span></div><div class="content">内容</div><div class="btn-group"><button class="submit">确认</button><button class="cancel">取消</button></div></div></div>';
 		var container = document.createElement("div");
 		container.innerHTML = template;
